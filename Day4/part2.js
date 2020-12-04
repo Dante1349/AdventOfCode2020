@@ -22,32 +22,32 @@ function validate(pw) {
 		pw.hcl.match(/#[a-f, 0-9]{6}/g).length==1) : true;
 	let ecl = (keys.includes('ecl')) ? (pw.ecl.match(/amb|blu|brn|gry|grn|hzl|oth/g) && 
 		pw.ecl.match(/amb|blu|brn|gry|grn|hzl|oth/g).length==1) : true;
-	let pid = (keys.includes('pid')) ? (pw.pid.match(/^\d{9}$/g) !==null && 
+	let pid = (keys.includes('pid')) ? (pw.pid.match(/^\d{9}$/g) !== null && 
 		pw.pid.match(/^\d{9}$/g).length==1) : true;
 
 	return byr&&iyr&&eyr&&hgt&&hcl&&ecl&&pid;
 }
 
 document
-.getElementsByTagName('pre')[0]
-.innerText
-.split(/\n{2,}/g).map(ae=>ae.split(' ')
-.map(e=>e.split('\n')))
-.map(e=>e.flat())
-.map(e=>e.filter(ae=>ae!==""))
-.map(e=>e.map(ae=>ae.split(':')))
-.map(e=>{
-	let o = {};
-	e.forEach(ae=>o[ae[0]] = ae[1])
-	return o;
-})
-.filter(e=> {
-	let keys = Object.keys(e); 
-	if(keys.includes('cid')) {
-		return keys.length==8;
-	} else {
-		return keys.length==7;
-	}
-})
-.filter(e => validate(e))
-.length
+	.getElementsByTagName('pre')[0]
+	.innerText
+	.split(/\n{2,}/g).map(ae=>ae.split(' ')
+	.map(e=>e.split('\n')))
+	.map(e=>e.flat())
+	.map(e=>e.filter(ae=>ae!==""))
+	.map(e=>e.map(ae=>ae.split(':')))
+	.map(e=>{
+		let o = {};
+		e.forEach(ae=>o[ae[0]] = ae[1])
+		return o;
+	})
+	.filter(e=> {
+		let keys = Object.keys(e); 
+		if(keys.includes('cid')) {
+			return keys.length==8;
+		} else {
+			return keys.length==7;
+		}
+	})
+	.filter(e => validate(e))
+	.length
